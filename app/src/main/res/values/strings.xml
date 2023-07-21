@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Movie Review</string>
+    <string name="api_key">b709a1805d375b12bf5d4bf89adbd9f3</string>
+    <string name="default_lang">en-US</string>
+
+    <string-array name="list_visibility">
+        <item>Public</item>
+        <item>Private</item>
+    </string-array>
+    
+    <string-array name="movie_status">
+        <item>Watching</item>
+        <item>Watched</item>
+        <item>Watchlist</item>
+    </string-array>
+
+    <string name="drawer_open">open_nav_drawer</string>
+    <string name="drawer_close">close_nav_drawer</string>
+</resources>

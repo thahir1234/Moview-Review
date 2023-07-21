@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/tb_list"
+            layout="@layout/toolbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tb_list">
+
+
+            <TextView
+                android:id="@+id/list_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Peak Horror"
+                android:visibility="gone"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/list_owner_iv"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/chris_evans"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/list_title_tv"
+                app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
+
+            <TextView
+                android:id="@+id/list_ownername_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="Chris Evans"
+                app:layout_constraintBottom_toBottomOf="@+id/list_owner_iv"
+                app:layout_constraintStart_toEndOf="@+id/list_owner_iv"
+                app:layout_constraintTop_toTopOf="@+id/list_owner_iv" />
+
+            <TextView
+                android:id="@+id/textView28"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="|"
+                android:textSize="28sp"
+                app:layout_constraintBottom_toBottomOf="@+id/list_ownername_tv"
+                app:layout_constraintStart_toEndOf="@+id/list_ownername_tv"
+                app:layout_constraintTop_toTopOf="@+id/list_ownername_tv" />
+
+            <TextView
+                android:id="@+id/list_days_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="7 days ago"
+                app:layout_constraintBottom_toBottomOf="@+id/textView28"
+                app:layout_constraintStart_toEndOf="@+id/textView28"
+                app:layout_constraintTop_toTopOf="@+id/textView28" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_movies_rv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/list_owner_iv" />
+
+            <!--        <TextView-->
+            <!--            android:id="@+id/textView29"-->
+            <!--            android:layout_width="wrap_content"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:layout_marginStart="5dp"-->
+            <!--            android:layout_marginTop="10dp"-->
+            <!--            android:text="Comments"-->
+            <!--            android:textSize="20sp"-->
+            <!--            android:textStyle="bold"-->
+            <!--            app:layout_constraintStart_toStartOf="parent"-->
+            <!--            app:layout_constraintTop_toBottomOf="@+id/list_movies_rv" />-->
+
+            <!--        <androidx.recyclerview.widget.RecyclerView-->
+            <!--            android:id="@+id/list_comments_rv"-->
+            <!--            android:layout_width="0dp"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:layout_marginStart="5dp"-->
+            <!--            android:layout_marginTop="5dp"-->
+            <!--            app:layout_constraintEnd_toEndOf="parent"-->
+            <!--            app:layout_constraintStart_toStartOf="parent"-->
+            <!--            app:layout_constraintTop_toBottomOf="@+id/textView29" />-->
+
+            <!--        <EditText-->
+            <!--            android:id="@+id/list_comment_et"-->
+            <!--            android:layout_width="match_parent"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:layout_marginStart="5dp"-->
+            <!--            android:layout_marginTop="10dp"-->
+            <!--            android:hint="Write a comment"-->
+            <!--            android:inputType="textMultiLine"-->
+            <!--            android:lines="8"-->
+            <!--            android:maxLines="10"-->
+            <!--            android:minLines="6"-->
+            <!--            android:scrollbars="vertical"-->
+            <!--            app:layout_constraintEnd_toEndOf="parent"-->
+            <!--            app:layout_constraintStart_toStartOf="parent"-->
+            <!--            app:layout_constraintTop_toBottomOf="@+id/list_comments_rv" />-->
+
+            <!--        <Button-->
+            <!--            android:id="@+id/list_comment_btn"-->
+            <!--            android:layout_width="match_parent"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:layout_marginStart="5dp"-->
+            <!--            android:text="comment"-->
+            <!--            app:layout_constraintEnd_toEndOf="parent"-->
+            <!--            app:layout_constraintStart_toStartOf="parent"-->
+            <!--            app:layout_constraintTop_toBottomOf="@+id/list_comment_et" />-->
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MovieReview"
+        tools:targetApi="31">
+        <activity
+            android:name=".view.activities.DefaultActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan"
+            >
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity android:name=".view.activities.SignupActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize"
+            >
+
+
+        </activity>
+        <activity android:name=".view.activities.LoginActivity"
+            android:exported="true"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.activities.SeeAllMovieActivity"
+            android:exported="true">
+
+
+        </activity>
+        <activity android:name=".view.activities.MovieActivity"
+            android:exported="true"
+            >
+
+        </activity>
+        <activity android:name=".view.activities.PostReviewActivity"
+            android:exported="true"/>
+        <activity android:name=".view.activities.YoursActivity"/>
+        <activity android:name=".view.activities.WatchingActivity"/>
+        <activity android:name=".view.activities.ProfileActivity"/>
+        <activity android:name=".view.activities.ListActivity"/>
+        <activity android:name=".view.activities.AddMovieActivity"/>
+        <activity android:name=".view.activities.SeeAllReviewActivity"/>
+        <activity android:name=".view.activities.PeopleActivity"/>
+    </application>
+
+</manifest>

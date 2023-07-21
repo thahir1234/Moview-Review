@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ProgressBar
+        android:id="@+id/home_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/home_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/content_home_cl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/nav_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/manga"
+                android:elevation="4dp"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:titleTextColor="@color/white" />
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/banner_vp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/nav_toolbar" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/banner_vp">
+
+                <TextView
+                    android:id="@+id/trending_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Trending"
+                    android:textColor="@color/manga"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/recent_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Recent"
+                    android:textColor="@color/manga"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/trending_rv" />
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/trending_tv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/trending_tv">
+
+                    <TextView
+                        android:id="@+id/trending_seeall_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:drawableEnd="@drawable/forward_arrow"
+                        android:paddingVertical="8dp"
+                        android:paddingStart="8dp"
+                        android:text="See all"
+                        android:textSize="16sp"
+                        android:visibility="visible"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/recent_seeall_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:drawableEnd="@drawable/forward_arrow"
+                    android:paddingVertical="8dp"
+                    android:paddingStart="8dp"
+                    android:text="See all"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/recent_tv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/recent_tv" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/trending_rv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recent_rv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/recent_seeall_tv">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <TextView
+                    android:id="@+id/action_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Action"
+                    android:textColor="@color/manga"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/recent_rv" />
+
+                <TextView
+                    android:id="@+id/action_seeall_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:drawableEnd="@drawable/forward_arrow"
+                    android:paddingVertical="8dp"
+                    android:paddingStart="8dp"
+                    android:text="See all"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/action_tv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/action_tv" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/action_rv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/action_seeall_tv" />
+
+                <TextView
+                    android:id="@+id/adventure_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Adventure"
+                    android:textColor="@color/manga"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/action_rv" />
+
+                <TextView
+                    android:id="@+id/adventure_seeall_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:drawableEnd="@drawable/forward_arrow"
+                    android:paddingVertical="8dp"
+                    android:paddingStart="8dp"
+                    android:text="See all"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/adventure_tv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/adventure_tv" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/adventure_rv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/adventure_seeall_tv" />
+
+                <TextView
+                    android:id="@+id/animation_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Animation"
+                    android:textColor="@color/manga"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/adventure_rv" />
+
+                <TextView
+                    android:id="@+id/animation_seeall_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:drawableEnd="@drawable/forward_arrow"
+                    android:paddingVertical="8dp"
+                    android:paddingStart="8dp"
+                    android:text="See all"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@id/animation_tv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/animation_tv" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/animation_rv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/animation_seeall_tv" />
+
+                <TextView
+                    android:id="@+id/romance_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Romance"
+                    android:textColor="@color/manga"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/animation_rv" />
+
+                <TextView
+                    android:id="@+id/romance_seeall_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:drawableEnd="@drawable/forward_arrow"
+                    android:paddingVertical="8dp"
+                    android:paddingStart="8dp"
+                    android:text="See all"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@id/romance_tv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/romance_tv" />
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/romance_rv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/romance_seeall_tv" />
+
+                <TextView
+                    android:id="@+id/crime_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Crime"
+                    android:textColor="@color/manga"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/romance_rv" />
+
+                <TextView
+                    android:id="@+id/crime_seeall_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:drawableEnd="@drawable/forward_arrow"
+                    android:paddingVertical="8dp"
+                    android:paddingStart="8dp"
+                    android:text="See all"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@id/crime_tv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/crime_tv" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/crime_rv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/crime_seeall_tv" />
+
+                <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+                <!--                android:id="@+id/constraintLayout"-->
+                <!--                android:layout_width="wrap_content"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:background="?android:attr/selectableItemBackground"-->
+                <!--                android:clickable="true"-->
+                <!--                android:focusable="true"-->
+                <!--                app:layout_constraintBottom_toBottomOf="@+id/trending_tv"-->
+                <!--                app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                app:layout_constraintTop_toTopOf="@+id/trending_tv">-->
+
+                <!--                <ImageView-->
+
+                <!--                    android:id="@+id/imageView3"-->
+                <!--                    android:layout_width="24dp"-->
+                <!--                    android:layout_height="24dp"-->
+                <!--                    android:layout_marginEnd="8dp"-->
+                <!--                    android:layout_marginStart="12dp"-->
+                <!--                    android:layout_marginVertical="12dp"-->
+                <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+
+                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toTopOf="parent"-->
+                <!--                    app:srcCompat="@drawable/forward_arrow" />-->
+                <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

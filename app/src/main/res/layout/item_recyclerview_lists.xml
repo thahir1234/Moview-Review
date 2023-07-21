@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginVertical="10dp"
+    app:cardCornerRadius="12dp"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?android:attr/selectableItemBackground"
+        android:padding="12dp"
+        >
+
+        <TextView
+            android:id="@+id/your_list_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="Peak Horror"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/textView21"
+            app:layout_constraintStart_toEndOf="@+id/textView21"
+            app:layout_constraintTop_toTopOf="@+id/textView21" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/your_list_profile"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="fitXY"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+            android:src="@drawable/chris_evans"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/your_list_owner_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="9dp"
+            android:text="Chris"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/your_list_profile"
+            app:layout_constraintStart_toEndOf="@+id/your_list_profile"
+            app:layout_constraintTop_toTopOf="@+id/your_list_profile" />
+
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="|"
+            android:textSize="26sp"
+            app:layout_constraintBottom_toBottomOf="@+id/your_list_owner_name"
+            app:layout_constraintStart_toEndOf="@+id/your_list_owner_name"
+            app:layout_constraintTop_toTopOf="@+id/your_list_owner_name" />
+
+        <ImageView
+            android:id="@+id/your_list_image1"
+            android:layout_width="80dp"
+            android:layout_height="112dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/plus_black"
+            android:scaleType="fitXY"
+
+            android:background="@drawable/round_border"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/your_list_profile" />
+
+        <ImageView
+            android:id="@+id/your_list_image2"
+            android:layout_width="80dp"
+            android:layout_height="112dp"
+            android:layout_marginTop="16dp"
+            android:scaleType="fitXY"
+            android:layout_marginStart="6dp"
+            android:background="@drawable/round_border"
+            app:layout_constraintStart_toEndOf="@+id/your_list_image1"
+            app:layout_constraintTop_toBottomOf="@+id/your_list_profile" />
+
+        <ImageView
+            android:id="@+id/your_list_image3"
+            android:layout_width="80dp"
+            android:layout_height="112dp"
+            android:layout_marginTop="16dp"
+            android:scaleType="fitXY"
+            android:layout_marginStart="6dp"
+
+            android:background="@drawable/round_border"
+            app:layout_constraintStart_toEndOf="@+id/your_list_image2"
+            app:layout_constraintTop_toBottomOf="@+id/your_list_profile" />
+
+        <ImageView
+            android:id="@+id/your_list_image4"
+            android:layout_width="80dp"
+            android:layout_height="112dp"
+            android:layout_marginTop="16dp"
+            android:scaleType="fitXY"
+            android:layout_marginStart="6dp"
+
+            android:background="@drawable/round_border"
+            app:layout_constraintStart_toEndOf="@+id/your_list_image3"
+            app:layout_constraintTop_toBottomOf="@+id/your_list_profile" />
+
+        <ImageView
+            android:id="@+id/your_list_like_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:paddingVertical="8dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="16dp"
+            android:src="@drawable/heart"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="?android:attr/selectableItemBackground"
+            app:layout_constraintTop_toBottomOf="@+id/your_list_image1" />
+
+        <TextView
+            android:id="@+id/your_list_like_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:text="67"
+            android:clickable="false"
+            app:layout_constraintBottom_toBottomOf="@+id/your_list_like_iv"
+            app:layout_constraintEnd_toEndOf="@+id/your_list_like_iv"
+            app:layout_constraintTop_toTopOf="@+id/your_list_like_iv" />
+
+        <TextView
+            android:id="@+id/your_list_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="7dp"
+            android:text="4 item(s)"
+            app:layout_constraintBottom_toBottomOf="@+id/textView22"
+            app:layout_constraintEnd_toStartOf="@+id/textView22"
+            app:layout_constraintTop_toTopOf="@+id/textView22" />
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:text="|"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/your_list_date"
+            app:layout_constraintEnd_toStartOf="@+id/your_list_date"
+            app:layout_constraintTop_toTopOf="@+id/your_list_date" />
+
+        <TextView
+            android:id="@+id/your_list_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="7 days ago"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
