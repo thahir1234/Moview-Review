@@ -21,7 +21,7 @@
     <ImageView
         android:id="@+id/people_pic_iv"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="450dp"
         android:scaleType="fitXY"
         android:foreground="@drawable/grad_bottom"
         android:src="@drawable/cast_default"
@@ -68,7 +68,9 @@
             android:layout_height="100dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardElevation="0dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

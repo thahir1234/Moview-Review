@@ -1,15 +1,13 @@
 package com.example.moviereview.view.activities
 
 import android.app.Dialog
+import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.preference.PreferenceManager
-import android.view.Gravity
-import android.view.View
-import android.view.ViewGroup
-import android.view.Window
+import android.view.*
 import android.widget.ImageView
 import android.widget.RadioButton
 import android.widget.TextView
@@ -22,6 +20,7 @@ import com.example.moviereview.db.local.entities.Movies
 import com.example.moviereview.db.local.viewmodel.MoviesViewModel
 import com.example.moviereview.db.local.viewmodel.UserMoviesViewModel
 import com.example.moviereview.view.adapter.SearchResultRvAdapter
+import com.google.android.material.navigation.NavigationView
 
 class WatchingActivity : AppCompatActivity() {
 
@@ -221,5 +220,10 @@ class WatchingActivity : AppCompatActivity() {
 //
 //            }
         }
+
+    }
+    override fun onBackPressed() {
+        setResult(100, Intent())
+        finish()
     }
 }

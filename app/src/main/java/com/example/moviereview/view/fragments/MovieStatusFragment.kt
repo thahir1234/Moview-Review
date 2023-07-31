@@ -46,8 +46,8 @@ class MovieStatusFragment(val movieId : Int,var position:Int) : DialogFragment()
                     if(position>=0) {
                         var status = values[position]
                         userMoviesViewModel.addUserMovies(UserMovies(email!!, movieId, status))
-                        Toast.makeText(requireContext(), position.toString(), Toast.LENGTH_SHORT)
-                            .show()
+//                        Toast.makeText(requireContext(), position.toString(), Toast.LENGTH_SHORT)
+//                            .show()
                     }
                 }
             })

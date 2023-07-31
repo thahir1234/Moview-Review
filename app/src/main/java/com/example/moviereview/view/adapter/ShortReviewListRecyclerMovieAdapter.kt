@@ -8,13 +8,11 @@ import android.widget.TextView
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
-import androidx.lifecycle.get
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviereview.R
 import com.example.moviereview.db.local.entities.Reviews
 import com.example.moviereview.db.local.viewmodel.UsersViewModel
 import com.google.android.material.imageview.ShapeableImageView
-import org.w3c.dom.Text
 import java.util.LinkedList
 
 class ShortReviewListRecyclerMovieAdapter (var context: Context,var vm:ViewModelStoreOwner,var lifecycleOwner: LifecycleOwner):RecyclerView.Adapter<ShortReviewListRecyclerMovieAdapter.MyViewHolder>(){

@@ -1,6 +1,7 @@
-package com.example.moviereview.view.adapter
+package com.example.moviereview.view.list_screen_clean.presentation.adapter
 
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,23 +9,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviereview.R
-import com.example.moviereview.db.local.entities.ListMovies
-import com.example.moviereview.db.local.entities.Movies
-import com.example.moviereview.db.local.viewmodel.ListMoviesViewModel
+import com.example.moviereview.view.list_screen_clean.presentation.viewmodel.ListMoviesViewModel
 import com.example.moviereview.utils.HelperFunction
-import com.example.moviereview.view.activities.AddMovieActivity
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.util.LinkedList
+import com.example.moviereview.view.list_screen_clean.presentation.view.AddMovieActivity
+import kotlinx.coroutines.*
 
 class UserListRvAdapter(var context: Context,val listId:Long,val viewModelStoreOwner: ViewModelStoreOwner,val lifecycleOwner: LifecycleOwner): RecyclerView.Adapter<UserListRvAdapter.MyViewHolder>() {
 
@@ -46,7 +41,7 @@ class UserListRvAdapter(var context: Context,val listId:Long,val viewModelStoreO
         var view:View = inflater.inflate(R.layout.item_list_movie,parent,false)
 
         listMoviesViewModel = ViewModelProvider(viewModelStoreOwner).get(ListMoviesViewModel::class.java)
-        return UserListRvAdapter.MyViewHolder(view)
+        return MyViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
@@ -58,9 +53,10 @@ class UserListRvAdapter(var context: Context,val listId:Long,val viewModelStoreO
             holder.cancel.visibility = View.GONE
 
             holder.poster.setOnClickListener {
+                Log.i("list_prob","$position ${movies.size}")
                 if(position == movies.size)
                 {
-                    val intent = Intent(context,AddMovieActivity::class.java)
+                    val intent = Intent(context, AddMovieActivity::class.java)
                     intent.putExtra("listId",listId)
                     context.startActivity(intent)
                 }
@@ -78,7 +74,17 @@ class UserListRvAdapter(var context: Context,val listId:Long,val viewModelStoreO
                 if(it.size==1) {
                     val currentMovie = it.get(0)
                     holder.cancel.visibility = View.VISIBLE
-                    HelperFunction.loadImageGlide(context,"https://image.tmdb.org/t/p/original/" + currentMovie.poster,holder.poster)
+                    if(currentMovie.poster.isNullOrEmpty())
+                    {
+                        holder.poster.setImageResource(R.drawable.poster_not)
+                    }
+                    else {
+                        HelperFunction.loadImage(
+                            context,
+                            "https://image.tmdb.org/t/p/original/" + currentMovie.poster,
+                            holder.poster
+                        )
+                    }
 //                    CoroutineScope(Dispatchers.IO).launch {
 //                        val bitmap = HelperFunction.downloadImage("https://image.tmdb.org/t/p/original/" + currentMovie.poster)
 //                        withContext(Dispatchers.Main) {
@@ -87,13 +93,29 @@ class UserListRvAdapter(var context: Context,val listId:Long,val viewModelStoreO
 //                    }
                     holder.number.text = (position + 1).toString()
                     holder.cancel.setOnClickListener {
-                        listMoviesViewModel.deleteListMovie(listId.toInt(),currentMovie.movieId)
-                        thing = movies[position]
+                        AlertDialog.Builder(context).apply {
+                            setTitle("Do you wish to delete?")
+                            setMessage("You review will be deleted from the movie")
+                            setPositiveButton("Delete",object: DialogInterface.OnClickListener{
+                                override fun onClick(dialog: DialogInterface?, which: Int) {
+                                    listMoviesViewModel.deleteListMovie(listId.toInt(),currentMovie.movieId)
+                                    thing = movies[position]
+                                }
+                            })
+                            setNegativeButton("Cancel",object : DialogInterface.OnClickListener{
+                                override fun onClick(dialog: DialogInterface?, which: Int) {
+
+                                }
+                            })
+                            show()
+                        }
+
                     }
                 }
                 else
                 {
                     movies.remove(thing)
+                    notifyDataSetChanged()
                     notifyItemRemoved(position)
                 }
             }

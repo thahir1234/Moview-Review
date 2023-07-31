@@ -1,4 +1,4 @@
-package com.example.moviereview.view.activities
+package com.example.moviereview.view.list_screen_clean.presentation.view
 
 import android.os.Bundle
 import android.util.Log
@@ -12,9 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviereview.R
 import com.example.moviereview.databinding.ActivityAddMovieBinding
 import com.example.moviereview.db.remote.api.APIImplementation
-import com.example.moviereview.db.remote.model.MovieList
+import com.example.moviereview.view.list_screen_clean.data.api.dto.MovieList
 import com.example.moviereview.db.remote.model.ShortMovieDesc
-import com.example.moviereview.view.adapter.AddMovieResultRvAdapter
+import com.example.moviereview.view.list_screen_clean.data.api.MovieSearchApiImpl
+import com.example.moviereview.view.list_screen_clean.presentation.adapter.AddMovieResultRvAdapter
 
 class AddMovieActivity : AppCompatActivity() {
 
@@ -53,7 +54,7 @@ class AddMovieActivity : AppCompatActivity() {
                 {
                     searchResultsArray =arrayListOf()
 
-                    searchResults = APIImplementation.searchMovies(query.trim())
+                    searchResults = MovieSearchApiImpl.searchMovies(query.trim())
 
                     searchResults?.observe(this@AddMovieActivity)
                     {

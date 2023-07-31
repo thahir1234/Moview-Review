@@ -25,7 +25,7 @@ import kotlin.random.Random
 const val TAG = "signup"
 class SignupActivity : AppCompatActivity() {
 
-    lateinit var binding:ActivitySignupBinding
+    lateinit var binding:com.example.moviereview.databinding.ActivitySignupBinding
 
     lateinit var accountsViewModel: AccountsViewModel
 
@@ -165,7 +165,7 @@ class SignupActivity : AppCompatActivity() {
         if(!okPassword)
         {
             binding.passwordEtSignup.editText?.requestFocus()
-            binding.passwordEtSignup.setError("Enter a valid password!(atleast 1 lowercase,1 uppercase,1 digit,1 special character)")
+            binding.passwordEtSignup.setError("Enter a valid password!(least 1 lowercase,1 uppercase,1 digit,1 special character and min 8 characters)")
             binding.passwordEtSignup.errorIconDrawable = null
 
         }
@@ -187,7 +187,7 @@ class SignupActivity : AppCompatActivity() {
         }
         if(okEmail && okPassword && okConPassword)
         {
-            val toast = Toast.makeText(this,"Success Sign up",Toast.LENGTH_LONG)
+            val toast = Toast.makeText(this,"Sign up successful",Toast.LENGTH_LONG)
             HelperFunction.showToast(toast,resources)
             return true
         }
@@ -196,9 +196,11 @@ class SignupActivity : AppCompatActivity() {
     }
     fun isValidPassword(password: String?): Boolean {
         return when {
-            !password?.contains(Regex("[A-Z]"))!! -> false
+            !password?.contains(Regex("[a-z]"))!! -> false
+            !password.contains(Regex("[A-Z]"))!! -> false
             !password.contains(Regex("[0-9]")) -> false
             !password.contains(Regex("[^a-zA-Z0-9 ]")) -> false
+            password.trim().length<8 -> false
             else -> true
         }
     }

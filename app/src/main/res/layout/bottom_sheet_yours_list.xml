@@ -60,6 +60,7 @@
             android:layout_gravity="center_horizontal"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
+            android:buttonTint="@color/manga"
             app:layout_constraintTop_toTopOf="parent" />
 
         <RadioButton
@@ -69,6 +70,7 @@
             android:text="Descending"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
+            android:buttonTint="@color/manga"
             app:layout_constraintStart_toEndOf="@+id/asc_rb_your_list"
             app:layout_constraintTop_toTopOf="parent" />
     </RadioGroup>
@@ -79,6 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/AscDesc_rg_your_list">
 
@@ -86,12 +89,14 @@
             android:id="@+id/name_rb_your_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:buttonTint="@color/manga"
             android:text="Name" />
 
         <RadioButton
             android:id="@+id/rating_rb_your_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:buttonTint="@color/manga"
             android:visibility="gone"
             android:text="Rating" />
 
@@ -99,7 +104,7 @@
             android:id="@+id/date_rb_your_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:buttonTint="@color/manga"
             android:text="Date"
             />
     </RadioGroup>

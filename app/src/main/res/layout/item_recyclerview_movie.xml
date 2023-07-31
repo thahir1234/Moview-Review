@@ -18,7 +18,7 @@
             android:layout_width="158dp"
             android:layout_height="188dp"
             android:scaleType="fitXY"
-            android:src="@drawable/ghosted"
+            android:src="@drawable/poster_default"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

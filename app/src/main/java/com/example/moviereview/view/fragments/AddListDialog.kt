@@ -16,7 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.moviereview.R
 import com.example.moviereview.db.local.entities.Lists
 import com.example.moviereview.db.local.viewmodel.ListViewModel
-import com.example.moviereview.view.activities.ListActivity
+import com.example.moviereview.view.list_screen_clean.presentation.view.ListActivity
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -40,13 +40,14 @@ class AddListDialog : AppCompatDialogFragment() {
         val listDesc = view.findViewById<TextView>(R.id.create_list_desc)
         val visibilityPrivate = view.findViewById<RadioButton>(R.id.visibility_private)
         val visibilityPublic = view.findViewById<RadioButton>(R.id.visibility_public)
+
+        visibilityPrivate.isChecked = true
         builder.apply {
             setView(view)
             setNegativeButton("Cancel",object :DialogInterface.OnClickListener{
                 override fun onClick(dialog: DialogInterface?, which: Int) {
 
                 }
-
             })
             setPositiveButton("Create",object:DialogInterface.OnClickListener{
                 override fun onClick(dialog: DialogInterface?, which: Int) {
@@ -65,7 +66,7 @@ class AddListDialog : AppCompatDialogFragment() {
                     listViewModel.newListId.observe(requireActivity())
                     {
                         Log.i("listId",it.toString())
-                        val intent = Intent(requireContext(),ListActivity::class.java)
+                        val intent = Intent(requireContext(), ListActivity::class.java)
                         intent.putExtra("listName",listName.text.toString())
                         intent.putExtra("listDesc",listDesc.text.toString())
                         intent.putExtra("listId",it)

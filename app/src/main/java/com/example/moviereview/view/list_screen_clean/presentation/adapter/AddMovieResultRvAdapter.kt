@@ -1,8 +1,7 @@
-package com.example.moviereview.view.adapter
+package com.example.moviereview.view.list_screen_clean.presentation.adapter
 
 import android.content.Context
 import android.content.DialogInterface
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,15 +15,10 @@ import androidx.lifecycle.ViewModelStoreOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviereview.R
 import com.example.moviereview.db.local.entities.ListMovies
-import com.example.moviereview.db.local.entities.Movies
-import com.example.moviereview.db.local.viewmodel.ListMoviesViewModel
+import com.example.moviereview.view.list_screen_clean.presentation.viewmodel.ListMoviesViewModel
 import com.example.moviereview.db.remote.model.ShortMovieDesc
 import com.example.moviereview.utils.HelperFunction
-import com.example.moviereview.view.activities.LoginActivity
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 class AddMovieResultRvAdapter (val context: Context,val listId:Long,val viewModelStoreOwner :ViewModelStoreOwner,val lifecycleOwner: LifecycleOwner) : RecyclerView.Adapter<AddMovieResultRvAdapter.MyViewHolder>() {
 
@@ -43,12 +37,12 @@ class AddMovieResultRvAdapter (val context: Context,val listId:Long,val viewMode
         var view:View = inflater.inflate(R.layout.item_searchresult,parent,false)
 
         listMovieViewModel = ViewModelProvider(viewModelStoreOwner).get(ListMoviesViewModel::class.java)
-        return AddMovieResultRvAdapter.MyViewHolder(view)
+        return MyViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = results[position]
-        HelperFunction.loadImageGlide(context,"https://image.tmdb.org/t/p/original/" + currentItem.poster,holder.poster)
+        HelperFunction.loadImage(context,"https://image.tmdb.org/t/p/original/" + currentItem.poster,holder.poster)
 //        CoroutineScope(Dispatchers.IO).launch {
 //            val bitmap = HelperFunction.downloadImage("https://image.tmdb.org/t/p/original/" + currentItem.poster)
 //            withContext(Dispatchers.Main) {
@@ -61,10 +55,10 @@ class AddMovieResultRvAdapter (val context: Context,val listId:Long,val viewMode
         }
 
         holder.itemView.setOnClickListener {
+            var flag = 1
             listMovieViewModel.getListMovies(listId.toInt())
             listMovieViewModel.listMoviesByListId.observe(lifecycleOwner)
             {
-                var flag = 1
                 for(i in it)
                 {
                     if(i.movieId == currentItem.movieId)

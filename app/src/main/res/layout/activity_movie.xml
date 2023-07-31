@@ -8,6 +8,7 @@
 
     <ProgressBar
         android:id="@+id/movie_detail_pb"
+        android:indeterminateTint="@color/manga"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -112,11 +113,15 @@
                     app:layout_constraintTop_toBottomOf="@+id/title_tv_movie" />
 
                 <ImageView
-                    android:id="@+id/imageView4"
+                    android:id="@+id/star_btn_movie"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:src="@drawable/star"
+                    android:paddingHorizontal="12dp"
+                    android:paddingBottom="20dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
                     app:layout_constraintEnd_toStartOf="@+id/watch_btn_movie"
                     app:layout_constraintStart_toEndOf="@+id/like_btn_movie"
                     app:layout_constraintTop_toBottomOf="@+id/desc_tv_movie" />
@@ -126,16 +131,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="46"
-                    app:layout_constraintEnd_toEndOf="@+id/imageView4"
-                    app:layout_constraintStart_toStartOf="@+id/imageView4"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+                    android:layout_marginTop="24dp"
+                    app:layout_constraintEnd_toEndOf="@+id/star_btn_movie"
+                    app:layout_constraintStart_toStartOf="@+id/star_btn_movie"
+                    app:layout_constraintTop_toTopOf="@+id/star_btn_movie" />
 
                 <TextView
                     android:id="@+id/likecount_tv_movie"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="135"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView4"
+                    app:layout_constraintEnd_toStartOf="@+id/star_btn_movie"
                     app:layout_constraintStart_toStartOf="@+id/like_btn_movie"
                     app:layout_constraintTop_toBottomOf="@+id/like_btn_movie" />
 
@@ -163,7 +169,7 @@
                     android:layout_marginTop="20dp"
                     android:contentDescription="Like Button"
                     android:src="@drawable/heart"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView4"
+                    app:layout_constraintEnd_toStartOf="@+id/star_btn_movie"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintHorizontal_chainStyle="spread"
                     app:layout_constraintStart_toStartOf="parent"
@@ -180,7 +186,7 @@
 
                     android:src="@drawable/schedule_purple"
                     app:layout_constraintEnd_toStartOf="@+id/review_btn_movie"
-                    app:layout_constraintStart_toEndOf="@+id/imageView4"
+                    app:layout_constraintStart_toEndOf="@+id/star_btn_movie"
                     app:layout_constraintTop_toBottomOf="@+id/desc_tv_movie" />
 
                 <ImageView
@@ -282,7 +288,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
                     <TextView
-                        android:id="@+id/textView16"
+                        android:id="@+id/cast_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -300,7 +306,20 @@
                         android:layout_marginTop="10dp"
                         android:padding="5dp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+                        app:layout_constraintTop_toBottomOf="@+id/cast_tv" />
+
+                    <TextView
+                        android:id="@+id/no_cast_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="No cast details"
+                        android:textSize="20sp"
+                        app:layout_constraintTop_toBottomOf="@id/cast_tv"
+                        app:layout_constraintStart_toEndOf="@id/casts_rv_movie"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toTopOf="@id/textView17"
+
+                    />
 
                     <TextView
                         android:id="@+id/textView17"
@@ -312,6 +331,7 @@
                         android:textSize="20sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
+                        app:layout_goneMarginTop="100dp"
                         app:layout_constraintTop_toBottomOf="@+id/casts_rv_movie" />
 
                     <TextView
@@ -368,7 +388,9 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/review_rv_movie"
                         app:layout_constraintTop_toBottomOf="@+id/textView17"
-                        app:layout_goneMarginLeft="0dp" />
+                         />
+
+
 
                     <TextView
                         android:id="@+id/similar_movie_substitute"
@@ -423,7 +445,7 @@
                     android:layout_marginTop="24dp"
                     android:text="Watched"
                     app:layout_constraintEnd_toEndOf="@+id/watch_btn_movie"
-                    app:layout_constraintStart_toEndOf="@+id/imageView4"
+                    app:layout_constraintStart_toEndOf="@+id/star_btn_movie"
                     app:layout_constraintTop_toTopOf="@+id/watch_btn_movie" />
 
 

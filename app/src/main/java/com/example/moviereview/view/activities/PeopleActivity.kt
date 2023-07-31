@@ -12,10 +12,8 @@ import com.example.moviereview.databinding.ActivityPeopleBinding
 import com.example.moviereview.db.remote.api.APIImplementation
 import com.example.moviereview.db.remote.model.PersonDesc
 import com.example.moviereview.utils.HelperFunction
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
+
 
 class PeopleActivity : AppCompatActivity() {
 
@@ -62,7 +60,7 @@ class PeopleActivity : AppCompatActivity() {
     private fun bindPeopleData(personDesc: PersonDesc)
     {
         if(personDesc.profilePic?.isNotEmpty() == true) {
-            HelperFunction.loadImageGlide(this,"https://image.tmdb.org/t/p/original/" + personDesc.profilePic,binding.peoplePicIv)
+            HelperFunction.loadImage(this,"https://image.tmdb.org/t/p/original/" + personDesc.profilePic,binding.peoplePicIv)
 //            CoroutineScope(Dispatchers.IO).launch {
 //                val bitmap = HelperFunction.downloadImage("https://image.tmdb.org/t/p/original/" + personDesc.profilePic)
 //                withContext(Dispatchers.Main) {

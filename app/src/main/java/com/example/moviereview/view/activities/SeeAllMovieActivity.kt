@@ -2,7 +2,6 @@ package com.example.moviereview.view.activities
 
 import android.graphics.Rect
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -20,10 +19,9 @@ import com.example.moviereview.db.local.viewmodel.PopularMoviesViewModel
 import com.example.moviereview.db.local.viewmodel.RecentMovieViewModel
 import com.example.moviereview.db.local.viewmodel.TrendingMovieViewModel
 import com.example.moviereview.db.remote.api.APIImplementation
-import com.example.moviereview.db.remote.model.MovieList
+import com.example.moviereview.view.list_screen_clean.data.api.dto.MovieList
 import com.example.moviereview.db.remote.model.ShortMovieDesc
 import com.example.moviereview.view.adapter.SearchResultRvAdapter
-import com.example.moviereview.view.fragments.HomeFragment
 
 class SeeAllMovieActivity : AppCompatActivity() {
     lateinit var binding: ActivityMovielistBinding
@@ -46,7 +44,7 @@ class SeeAllMovieActivity : AppCompatActivity() {
         binding = ActivityMovielistBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
+        binding.noMoviesTv.visibility = View.GONE
         findViewById<ImageView>(R.id.plus_iv).visibility = View.GONE
         findViewById<ImageView>(R.id.sort_iv).visibility = View.GONE
         findViewById<ImageView>(R.id.back_iv).setOnClickListener {

@@ -7,10 +7,12 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.moviereview.db.local.dao.*
 import com.example.moviereview.db.local.entities.*
+import com.example.moviereview.db.local.dao.ReviewsDao
+import com.example.moviereview.db.local.entities.Reviews
 
 @Database(
     entities = [
-    Accounts::class,Casts::class,Comments::class, FavouriteMovies::class,Genres::class,LikedLists::class,LikedReviews::class,ListMovies::class,Lists::class,Movies::class,Reviews::class,SimilarMovies::class,UserMovies::class,Users::class,TrendingMovies::class,RecentMovies::class,PopularMovies::class,ActionMovies::class,AdventureMovies::class,AnimationMovies::class,RomanceMovies::class,CrimeMovies::class,FavouriteLists::class,LoadedStatus::class],
+    Accounts::class,Casts::class,Comments::class, FavouriteMovies::class,Genres::class,LikedLists::class,LikedReviews::class,ListMovies::class,Lists::class,Movies::class, Reviews::class,SimilarMovies::class,UserMovies::class,Users::class,TrendingMovies::class,RecentMovies::class,PopularMovies::class,ActionMovies::class,AdventureMovies::class,AnimationMovies::class,RomanceMovies::class,CrimeMovies::class,FavouriteLists::class,LoadedStatus::class],
     version = 1,
     exportSchema = false
     )

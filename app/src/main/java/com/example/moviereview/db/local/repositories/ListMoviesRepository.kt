@@ -2,9 +2,7 @@ package com.example.moviereview.db.local.repositories
 
 import androidx.lifecycle.LiveData
 import com.example.moviereview.db.local.dao.ListMoviesDao
-import com.example.moviereview.db.local.dao.ReviewsDao
 import com.example.moviereview.db.local.entities.ListMovies
-import com.example.moviereview.db.local.entities.Reviews
 
 class ListMoviesRepository (private val listMoviesDao: ListMoviesDao) {
 

@@ -26,13 +26,12 @@ class LoginActivity : AppCompatActivity(){
 
     var isLoggedIn = false
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
-
+    override fun onResume() {
+        super.onResume()
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
         isLoggedIn = sharedPreferences.getBoolean("loggedIn",false)
 
+        Log.i("shared",isLoggedIn.toString())
         if(isLoggedIn)
         {
             setContentView(binding.root)
@@ -55,6 +54,12 @@ class LoginActivity : AppCompatActivity(){
         binding.intiateSignupBtn.setOnClickListener {
             startActivity(Intent(this,SignupActivity::class.java))
         }
+    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+
+
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

@@ -18,7 +18,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:scaleType="fitXY"
-            android:src="@drawable/chris_evans"
+            android:src="@drawable/person"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
@@ -71,7 +71,8 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-
+            android:maxLines="3"
+            android:ellipsize="end"
             android:text="orem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dictum dapibus ex a efficitur. Duis varius, ante a dap..."
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/your_review_profile" />

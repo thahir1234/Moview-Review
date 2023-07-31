@@ -1,8 +1,7 @@
 package com.example.moviereview.db.remote.api
 
-import com.example.moviereview.db.local.entities.Reviews
 import com.example.moviereview.db.remote.model.*
-import org.json.JSONObject
+import com.example.moviereview.view.list_screen_clean.data.api.dto.MovieList
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

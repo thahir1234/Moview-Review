@@ -1,12 +1,10 @@
 package com.example.moviereview.view.fragments
 
-import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
@@ -15,16 +13,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviereview.databinding.FragmentSearchBinding
 import com.example.moviereview.db.local.entities.ListMovies
 import com.example.moviereview.db.local.entities.Lists
-import com.example.moviereview.db.local.entities.Movies
-import com.example.moviereview.db.local.viewmodel.ListMoviesViewModel
+import com.example.moviereview.view.list_screen_clean.presentation.viewmodel.ListMoviesViewModel
 import com.example.moviereview.db.local.viewmodel.ListViewModel
 import com.example.moviereview.db.remote.api.APIImplementation
-import com.example.moviereview.db.remote.model.MovieList
+import com.example.moviereview.view.list_screen_clean.data.api.dto.MovieList
 import com.example.moviereview.db.remote.model.ShortMovieDesc
 import com.example.moviereview.view.adapter.ListsRecyclerViewAdapter
 import com.example.moviereview.view.adapter.SearchResultRvAdapter
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
 
 class SearchFragment : Fragment() {
 

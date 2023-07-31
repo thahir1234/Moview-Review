@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey
 data class ListMovies(
     val listId:Int,
     val movieId:Int,
-    val poster:String
+    val poster:String?
 ) {
 
     override fun equals(other: Any?): Boolean {

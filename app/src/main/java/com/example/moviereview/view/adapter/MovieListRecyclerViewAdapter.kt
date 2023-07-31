@@ -2,7 +2,6 @@ package com.example.moviereview.view.adapter
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,13 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.moviereview.R
 import com.example.moviereview.db.local.entities.Movies
 import com.example.moviereview.db.local.viewmodel.LoadedStatusViewModel
-import com.example.moviereview.utils.DownloadImageTask
 import com.example.moviereview.utils.HelperFunction
 import com.example.moviereview.view.activities.MovieActivity
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 class MovieListRecyclerViewAdapter(
     var context: Context,
@@ -55,21 +50,20 @@ class MovieListRecyclerViewAdapter(
             holder.year.text = currentItem.releaseDate.substring(0, 4)
         }
         if(currentItem.moviePoster?.isNotEmpty() == true) {
-
-            HelperFunction.loadImageGlide(context,"https://image.tmdb.org/t/p/original/" + currentItem.moviePoster,holder.poster)
-//            CoroutineScope(Dispatchers.IO).launch {
-//                val bitmap = HelperFunction.downloadImage("https://image.tmdb.org/t/p/original/" + currentItem.moviePoster)
-//                withContext(Dispatchers.Main) {
-//                    holder.poster.setImageBitmap(bitmap)
-//                }
-//            }
+//            HelperFunction.loadImage(context,"https://image.tmdb.org/t/p/original/" + currentItem.moviePoster,holder.poster)
+            CoroutineScope(Dispatchers.IO).launch {
+                val bitmap = HelperFunction.downloadImage("https://image.tmdb.org/t/p/original/" + currentItem.moviePoster)
+                withContext(Dispatchers.Main) {
+                    holder.poster.setImageBitmap(bitmap)
+                }
+            }
 //            DownloadImageTask(holder.poster).execute("https://image.tmdb.org/t/p/original/" + currentItem.moviePoster)
         }
         else{
             holder.poster.setImageResource(R.drawable.poster_not)
         }
         holder.itemView.setOnClickListener {
-            Toast.makeText(context,currentItem.movieId.toString(),Toast.LENGTH_SHORT).show()
+//            Toast.makeText(context,currentItem.movieId.toString(),Toast.LENGTH_SHORT).show()
             val intent = Intent(context,MovieActivity::class.java)
 
             intent.putExtra("movieId",currentItem.movieId)

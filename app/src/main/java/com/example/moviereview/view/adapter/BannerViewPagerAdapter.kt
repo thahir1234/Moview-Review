@@ -47,7 +47,7 @@ class BannerViewPagerAdapter(var context: Context,var loadedStatusViewModel: Loa
     override fun onBindViewHolder(holder: ViewPagerViewHolder, position: Int) {
         if(movies.size>0) {
             val currentMovie = movies.get(position % movies.size)
-            HelperFunction.loadImageGlide(context,"https://image.tmdb.org/t/p/original/" + currentMovie.movieBanner,holder.iv)
+            HelperFunction.loadImage(context,"https://image.tmdb.org/t/p/original/" + currentMovie.movieBanner,holder.iv)
 //            CoroutineScope(Dispatchers.IO).launch {
 //                val bitmap = HelperFunction.downloadImage("https://image.tmdb.org/t/p/original/" + currentMovie.movieBanner)
 //                withContext(Dispatchers.Main) {

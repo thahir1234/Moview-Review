@@ -34,7 +34,7 @@
             android:layout_height="40dp"
             android:scaleType="fitXY"
             app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
-            android:src="@drawable/chris_evans"
+            android:src="@drawable/person"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

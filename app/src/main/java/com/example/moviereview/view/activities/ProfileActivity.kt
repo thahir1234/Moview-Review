@@ -1,14 +1,18 @@
 package com.example.moviereview.view.activities
 
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Rect
 import android.net.Uri
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -21,6 +25,7 @@ import com.example.moviereview.databinding.ActivityProfileBinding
 import com.example.moviereview.db.local.entities.Users
 import com.example.moviereview.db.local.viewmodel.UsersViewModel
 import com.example.moviereview.utils.HelperFunction
+import java.io.ByteArrayOutputStream
 
 
 class ProfileActivity : AppCompatActivity() {
@@ -40,13 +45,25 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val imm: InputMethodManager = this
+            .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
         findViewById<TextView>(R.id.actname_tv).text  = "Profile"
         findViewById<ImageView>(R.id.plus_iv).visibility = View.GONE
         findViewById<ImageView>(R.id.sort_iv).visibility = View.GONE
         findViewById<ImageView>(R.id.tick_iv).visibility = View.VISIBLE
         findViewById<ImageView>(R.id.back_iv).setOnClickListener {
-            onBackPressed()
+            val r=  Rect();
+            //r will be populated with the coordinates of your view that area still visible.
+            binding.root.getWindowVisibleDisplayFrame(r);
+
+            val heightDiff =  binding.root.rootView.getHeight() - r.height();
+            if (heightDiff > 0.25*binding.root.getRootView().getHeight()) { // if more than 25% of the screen, its probably a keyboard...
+                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
+            }
+            else {
+                onBackPressed()
+            }
         }
 
         bitmap = ContextCompat.getDrawable(this, R.drawable.account_profile)?.toBitmap()!!
@@ -83,10 +100,24 @@ class ProfileActivity : AppCompatActivity() {
         }
 
         findViewById<ImageView>(R.id.tick_iv).setOnClickListener {
-            usersViewModel.addUser(Users(email = email, name = binding.profileNameEt.text.toString(), bio = binding.profileDescEt.text.toString(), image = bitmap, dateCreated = "", userId = kotlin.random.Random.nextInt(0,100)))
-            val toast = Toast.makeText(this,"Updated!",Toast.LENGTH_SHORT)
-            HelperFunction.showToast(toast,resources)
-            onBackPressed()
+            val r=  Rect();
+            //r will be populated with the coordinates of your view that area still visible.
+            binding.root.getWindowVisibleDisplayFrame(r);
+
+            val heightDiff =  binding.root.rootView.getHeight() - r.height();
+            if (heightDiff > 0.25*binding.root.getRootView().getHeight()) { // if more than 25% of the screen, its probably a keyboard...
+                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
+                val toast = Toast.makeText(this,"Updated!",Toast.LENGTH_SHORT)
+                HelperFunction.showToast(toast,resources)
+                onBackPressed()
+            }
+            else {
+                usersViewModel.addUser(Users(email = email, name = binding.profileNameEt.text.toString(), bio = binding.profileDescEt.text.toString(), image = bitmap, dateCreated = "", userId = kotlin.random.Random.nextInt(0,100)))
+                val toast = Toast.makeText(this,"Updated!",Toast.LENGTH_SHORT)
+                HelperFunction.showToast(toast,resources)
+                onBackPressed()
+            }
+
         }
     }
 
@@ -119,12 +150,33 @@ class ProfileActivity : AppCompatActivity() {
 
             uri = data?.data!!
             bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uri)
+//            bitmap = compressImage(getBytes(bitmap))
             binding.profilePicIv.setImageBitmap(bitmap)
             //findViewById<ShapeableImageView>(R.id.your_review_profile).setImageBitmap(bitmap)
 
         }
     }
 
+    fun getBytes(bitmap: Bitmap) : ByteArray{
+        val stream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG,0,stream)
+        return stream.toByteArray()
+    }
+
+    fun compressImage(imageToCompress : ByteArray) : Bitmap
+    {
+        var compressImage = imageToCompress
+        if(compressImage.size>500000)
+        {
+            val bitmap = BitmapFactory.decodeByteArray(compressImage,0,compressImage.size)
+            val resized = Bitmap.createScaledBitmap(bitmap,(bitmap.width*0.8).toInt(),(bitmap.height*0.8).toInt(),true)
+            val stream = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.PNG,0,stream)
+            compressImage = stream.toByteArray()
+        }
+        return BitmapFactory.decodeByteArray(compressImage, 0, compressImage.size);
+
+    }
     override fun onStop() {
         super.onStop()
         findViewById<ImageView>(R.id.tick_iv).visibility = View.GONE
@@ -134,5 +186,9 @@ class ProfileActivity : AppCompatActivity() {
         super.onResume()
         findViewById<ImageView>(R.id.tick_iv).visibility = View.VISIBLE
 
+    }
+    override fun onBackPressed() {
+        setResult(100, Intent())
+        finish()
     }
 }

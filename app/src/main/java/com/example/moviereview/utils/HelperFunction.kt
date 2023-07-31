@@ -4,16 +4,12 @@ import android.content.Context
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.PorterDuff
 import android.text.TextUtils
 import android.util.Log
 import android.util.Patterns
-import android.view.View
 import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
-import com.example.moviereview.R
 import java.net.URL
 
 class HelperFunction {
@@ -34,12 +30,10 @@ class HelperFunction {
 //            text.setTextColor(resources.getColor(R.color.white))
             toast.show()
         }
-
-        fun loadImageGlide(context : Context,url: String,imageView: ImageView)
+        fun loadImage(context : Context,url: String,imageView: ImageView)
         {
             Glide.with(context).load(url).into(imageView)
         }
-
         fun downloadImage(imageUrl: String): Bitmap? {
             return try {
                 val conn = URL(imageUrl).openConnection()

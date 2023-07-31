@@ -8,7 +8,8 @@
     <color name="black">#FFFFFFFF</color>
     <color name="white">#FF000000</color>
     <color name="yellow">#f3ce13</color>
-    <color name="manga">#09C131</color>
-    <color name="lite_manga">#420888</color>
+    <color name="manga">#f3ce13</color>
+    <color name="lite_manga">#FFD500</color>
     <color name="grey">#808080</color>
+    <color name="lite_pic">#EFE095</color>
 </resources>

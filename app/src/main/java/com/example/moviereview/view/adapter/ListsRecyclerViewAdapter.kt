@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,12 +20,9 @@ import com.example.moviereview.db.local.viewmodel.FavListsViewModel
 import com.example.moviereview.db.local.viewmodel.LikedListViewModel
 import com.example.moviereview.db.local.viewmodel.UsersViewModel
 import com.example.moviereview.utils.HelperFunction
-import com.example.moviereview.view.activities.ListActivity
+import com.example.moviereview.view.list_screen_clean.presentation.view.ListActivity
 import com.google.android.material.imageview.ShapeableImageView
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 class ListsRecyclerViewAdapter(var context: Context,val viewOwner: ViewModelStoreOwner,val lifeOwner:LifecycleOwner) :
     RecyclerView.Adapter<ListsRecyclerViewAdapter.MyViewHolder>() {
@@ -94,7 +90,7 @@ class ListsRecyclerViewAdapter(var context: Context,val viewOwner: ViewModelStor
             holder.poster3.visibility = View.VISIBLE
             holder.poster4.visibility = View.VISIBLE
 
-            HelperFunction.loadImageGlide(context,"https://image.tmdb.org/t/p/original/" + currentMovies.get(0).poster,holder.poster1)
+            HelperFunction.loadImage(context,"https://image.tmdb.org/t/p/original/" + currentMovies.get(0).poster,holder.poster1)
 //            CoroutineScope(Dispatchers.IO).launch {
 //                val bitmap = HelperFunction.downloadImage("https://image.tmdb.org/t/p/original/" + currentMovies.get(0).poster)
 //                withContext(Dispatchers.Main) {
@@ -102,7 +98,7 @@ class ListsRecyclerViewAdapter(var context: Context,val viewOwner: ViewModelStor
 //                }
 //            }
 
-            HelperFunction.loadImageGlide(context,"https://image.tmdb.org/t/p/original/" + currentMovies.get(1).poster,holder.poster2)
+            HelperFunction.loadImage(context,"https://image.tmdb.org/t/p/original/" + currentMovies.get(1).poster,holder.poster2)
 //            CoroutineScope(Dispatchers.IO).launch {
 //                val bitmap = HelperFunction.downloadImage("https://image.tmdb.org/t/p/original/" + currentMovies.get(1).poster)
 //                withContext(Dispatchers.Main) {
@@ -110,7 +106,7 @@ class ListsRecyclerViewAdapter(var context: Context,val viewOwner: ViewModelStor
 //                }
 //            }
 
-            HelperFunction.loadImageGlide(context,"https://image.tmdb.org/t/p/original/" + currentMovies.get(2).poster,holder.poster3)
+            HelperFunction.loadImage(context,"https://image.tmdb.org/t/p/original/" + currentMovies.get(2).poster,holder.poster3)
 //            CoroutineScope(Dispatchers.IO).launch {
 //                val bitmap = HelperFunction.downloadImage("https://image.tmdb.org/t/p/original/" + currentMovies.get(2).poster)
 //                withContext(Dispatchers.Main) {
@@ -118,7 +114,7 @@ class ListsRecyclerViewAdapter(var context: Context,val viewOwner: ViewModelStor
 //                }
 //            }
 
-            HelperFunction.loadImageGlide(context,"https://image.tmdb.org/t/p/original/" + currentMovies.get(3).poster,holder.poster4)
+            HelperFunction.loadImage(context,"https://image.tmdb.org/t/p/original/" + currentMovies.get(3).poster,holder.poster4)
 //            CoroutineScope(Dispatchers.IO).launch {
 //                val bitmap = HelperFunction.downloadImage("https://image.tmdb.org/t/p/original/" + currentMovies.get(3).poster)
 //                withContext(Dispatchers.Main) {
@@ -131,7 +127,7 @@ class ListsRecyclerViewAdapter(var context: Context,val viewOwner: ViewModelStor
             holder.poster2.visibility = View.VISIBLE
             holder.poster3.visibility = View.VISIBLE
 
-            HelperFunction.loadImageGlide(context,"https://image.tmdb.org/t/p/original/" + currentMovies.get(0).poster,holder.poster1)
+            HelperFunction.loadImage(context,"https://image.tmdb.org/t/p/original/" + currentMovies.get(0).poster,holder.poster1)
 //            CoroutineScope(Dispatchers.IO).launch {
 //                val bitmap = HelperFunction.downloadImage("https://image.tmdb.org/t/p/original/" + currentMovies.get(0).poster)
 //                withContext(Dispatchers.Main) {
@@ -139,7 +135,7 @@ class ListsRecyclerViewAdapter(var context: Context,val viewOwner: ViewModelStor
 //                }
 //            }
 
-            HelperFunction.loadImageGlide(context,"https://image.tmdb.org/t/p/original/" + currentMovies.get(1).poster,holder.poster2)
+            HelperFunction.loadImage(context,"https://image.tmdb.org/t/p/original/" + currentMovies.get(1).poster,holder.poster2)
 //            CoroutineScope(Dispatchers.IO).launch {
 //                val bitmap = HelperFunction.downloadImage("https://image.tmdb.org/t/p/original/" + currentMovies.get(1).poster)
 //                withContext(Dispatchers.Main) {
@@ -147,7 +143,7 @@ class ListsRecyclerViewAdapter(var context: Context,val viewOwner: ViewModelStor
 //                }
 //            }
 
-            HelperFunction.loadImageGlide(context,"https://image.tmdb.org/t/p/original/" + currentMovies.get(2).poster,holder.poster3)
+            HelperFunction.loadImage(context,"https://image.tmdb.org/t/p/original/" + currentMovies.get(2).poster,holder.poster3)
 //            CoroutineScope(Dispatchers.IO).launch {
 //                val bitmap = HelperFunction.downloadImage("https://image.tmdb.org/t/p/original/" + currentMovies.get(2).poster)
 //                withContext(Dispatchers.Main) {
@@ -161,7 +157,7 @@ class ListsRecyclerViewAdapter(var context: Context,val viewOwner: ViewModelStor
             holder.poster1.visibility = View.VISIBLE
             holder.poster2.visibility = View.VISIBLE
 
-            HelperFunction.loadImageGlide(context,"https://image.tmdb.org/t/p/original/" + currentMovies.get(0).poster,holder.poster1)
+            HelperFunction.loadImage(context,"https://image.tmdb.org/t/p/original/" + currentMovies.get(0).poster,holder.poster1)
 //            CoroutineScope(Dispatchers.IO).launch {
 //                val bitmap = HelperFunction.downloadImage("https://image.tmdb.org/t/p/original/" + currentMovies.get(0).poster)
 //                withContext(Dispatchers.Main) {
@@ -169,7 +165,7 @@ class ListsRecyclerViewAdapter(var context: Context,val viewOwner: ViewModelStor
 //                }
 //            }
 
-            HelperFunction.loadImageGlide(context,"https://image.tmdb.org/t/p/original/" + currentMovies.get(1).poster,holder.poster2)
+            HelperFunction.loadImage(context,"https://image.tmdb.org/t/p/original/" + currentMovies.get(1).poster,holder.poster2)
 //            CoroutineScope(Dispatchers.IO).launch {
 //                val bitmap = HelperFunction.downloadImage("https://image.tmdb.org/t/p/original/" + currentMovies.get(1).poster)
 //                withContext(Dispatchers.Main) {
@@ -183,7 +179,7 @@ class ListsRecyclerViewAdapter(var context: Context,val viewOwner: ViewModelStor
         {
             holder.poster1.visibility = View.VISIBLE
 
-            HelperFunction.loadImageGlide(context,"https://image.tmdb.org/t/p/original/" + currentMovies.get(0).poster,holder.poster1)
+            HelperFunction.loadImage(context,"https://image.tmdb.org/t/p/original/" + currentMovies.get(0).poster,holder.poster1)
 //            CoroutineScope(Dispatchers.IO).launch {
 //                val bitmap = HelperFunction.downloadImage("https://image.tmdb.org/t/p/original/" + currentMovies.get(0).poster)
 //                withContext(Dispatchers.Main) {
@@ -207,7 +203,7 @@ class ListsRecyclerViewAdapter(var context: Context,val viewOwner: ViewModelStor
         }
 
         holder.itemView.setOnClickListener {
-            val intent = Intent(context,ListActivity::class.java)
+            val intent = Intent(context, ListActivity::class.java)
             intent.putExtra("listName",currentList.title)
             intent.putExtra("listId",currentList.listId.toLong())
             intent.putExtra("listDate",currentList.dateCreated)

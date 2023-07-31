@@ -1,17 +1,21 @@
 package com.example.moviereview.view.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Typeface
 import android.preference.PreferenceManager
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
@@ -24,12 +28,9 @@ import com.example.moviereview.db.local.viewmodel.ReviewsViewModel
 import com.example.moviereview.utils.HelperFunction
 import com.example.moviereview.view.activities.MovieActivity
 import com.example.moviereview.view.fragments.YourReviewFragment
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
-class YourReviewRvAdapter(var context: Context,var yourReviewFragment: YourReviewFragment,var lifecycleOwner: LifecycleOwner): RecyclerView.Adapter<YourReviewRvAdapter.MyViewHolder>() {
+class YourReviewRvAdapter(var context: Context, var yourReviewFragment: YourReviewFragment, var lifecycleOwner: LifecycleOwner): RecyclerView.Adapter<YourReviewRvAdapter.MyViewHolder>() {
 
     private var reviews : MutableList<Reviews> = arrayListOf()
 
@@ -63,16 +64,16 @@ class YourReviewRvAdapter(var context: Context,var yourReviewFragment: YourRevie
         reviewsViewModel = ViewModelProvider(yourReviewFragment).get(ReviewsViewModel::class.java)
         likedReviewsViewModel = ViewModelProvider(yourReviewFragment).get(LikedReviewsViewModel::class.java)
 
-        return YourReviewRvAdapter.MyViewHolder(view)
+        return MyViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyViewHolder, @SuppressLint("RecyclerView") position: Int) {
         val currentReview = reviews[position]
 
         moviesViewModel.getParticularMovie(currentReview.movieId)
         moviesViewModel.partMovie.observe(yourReviewFragment)
         {
-            HelperFunction.loadImageGlide(context,"https://image.tmdb.org/t/p/original/" + it.get(0).moviePoster,holder.poster)
+            HelperFunction.loadImage(context,"https://image.tmdb.org/t/p/original/" + it.get(0).moviePoster,holder.poster)
 //            CoroutineScope(Dispatchers.IO).launch {
 //                val bitmap = HelperFunction.downloadImage("https://image.tmdb.org/t/p/original/" + it.get(0).moviePoster)
 //                withContext(Dispatchers.Main) {
@@ -117,9 +118,24 @@ class YourReviewRvAdapter(var context: Context,var yourReviewFragment: YourRevie
         holder.rating.text = currentReview.rating.toString()
 
         holder.deleteBtn.setOnClickListener {
-            reviews.removeAt(position)
-            reviewsViewModel.deleteReview(email = currentReview.email, movieId = currentReview.movieId)
-            notifyItemRemoved(position);
+            AlertDialog.Builder(context).apply {
+                setTitle("Do you wish to delete?")
+                setMessage("You review will be deleted from the movie")
+                setPositiveButton("Delete",object: DialogInterface.OnClickListener{
+                    override fun onClick(dialog: DialogInterface?, which: Int) {
+                        reviews.removeAt(position)
+                        reviewsViewModel.deleteReview(email = currentReview.email, movieId = currentReview.movieId)
+                        notifyItemRemoved(position);
+                    }
+                })
+                setNegativeButton("Cancel",object : DialogInterface.OnClickListener{
+                    override fun onClick(dialog: DialogInterface?, which: Int) {
+
+                    }
+                })
+                show()
+            }
+
             //notifyItemRangeChanged(0, reviews.size);
         }
 
@@ -176,6 +192,11 @@ class YourReviewRvAdapter(var context: Context,var yourReviewFragment: YourRevie
 
     fun setNewReviews(newReviews:ArrayList<Reviews>)
     {
+        Log.i("sort_review",newReviews.size.toString())
+        if(newReviews.size == 2)
+        {
+            Log.i("sort_review",newReviews.get(0).name)
+        }
         reviews = newReviews.toMutableList()
         notifyDataSetChanged()
     }

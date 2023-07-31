@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.moviereview.db.remote.model.*
+import com.example.moviereview.view.list_screen_clean.data.api.dto.MovieList
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

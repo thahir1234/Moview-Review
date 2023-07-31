@@ -7,13 +7,14 @@
     android:layout_height="match_parent">
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingBottom="16dp"
+    android:layout_gravity="center">
 
     <TextView
         android:id="@+id/signup_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
         android:text="Sign Up"
         android:textColor="@color/manga"
         android:textSize="50sp"
@@ -105,7 +106,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/bio_et_signup"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -131,6 +132,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:text="Sign up"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="481dp" />

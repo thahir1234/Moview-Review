@@ -1,5 +1,6 @@
 package com.example.moviereview.view.fragments
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -22,7 +23,7 @@ import com.example.moviereview.databinding.FragmentHomeBinding
 import com.example.moviereview.db.local.entities.*
 import com.example.moviereview.db.local.viewmodel.*
 import com.example.moviereview.db.remote.api.APIImplementation
-import com.example.moviereview.db.remote.model.MovieList
+import com.example.moviereview.view.list_screen_clean.data.api.dto.MovieList
 import com.example.moviereview.db.remote.model.ShortMovieDesc
 import com.example.moviereview.view.activities.DefaultActivity
 import com.example.moviereview.view.activities.SeeAllMovieActivity
@@ -81,16 +82,21 @@ class HomeFragment : Fragment() {
     lateinit var loadedStatusViewModel: LoadedStatusViewModel
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onResume() {
+        Log.i("default_activity","onresume of homefrag")
+        super.onResume()
+        intializeBannerViewPager()
 
+        intializeMovieListRV()
+        Log.i("lifecycle","Home fragment Resumed")
 
-        Log.i("lifecycle","Home fragment Created")
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        handler.postDelayed(runnable , 2000)
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        Log.i("default_activity","onviewcreated of homefrag")
+
+        super.onViewCreated(view, savedInstanceState)
         val act = activity as DefaultActivity
         act.setSupportActionBar(binding.navToolbar)
 
@@ -156,10 +162,41 @@ class HomeFragment : Fragment() {
 
         seeAllListeners()
 
+    }
+
+    override fun onStart() {
+        Log.i("default_activity","onstart of homefrag")
+
+        super.onStart()
+    }
+
+    override fun onAttach(context: Context) {
+        Log.i("default_activity","onattach of homefrag")
+
+        super.onAttach(context)
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        Log.i("default_activity","onviewstaterestored of homefrag")
+
+        super.onViewStateRestored(savedInstanceState)
+
+    }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+
+        Log.i("default_activity","oncreate of homefrag")
+
+        Log.i("lifecycle","Home fragment Created")
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+
 
         return binding.root
     }
-
 
     private fun apiCalls(): MovieList? {
 
@@ -213,7 +250,7 @@ class HomeFragment : Fragment() {
 
     private fun popularMoviesObserver()
     {
-        popularMovies?.observe(viewLifecycleOwner){
+        popularMovies?.observe(requireActivity()){
             for(i in 0..5){
                 val movie = it.results.get(i)
                 moviesViewModel.addMovie(Movies(movieId = movie.movieId, movieBanner = movie.banner, moviePoster = movie.poster, movieName = movie.name, rating = movie.rating/2, releaseDate = movie.releaseDate, description = "", voteCount = movie.voteCount, status = "", runtime = 234))
@@ -226,13 +263,13 @@ class HomeFragment : Fragment() {
             }
         }
 
-        popularMoviesViewModel.allPopularMovies.observe(viewLifecycleOwner)
+        popularMoviesViewModel.allPopularMovies.observe(requireActivity())
         {
             var popularMoviesArray : HashSet<Movies> = hashSetOf()
             for(i in it)
             {
                 val currentMovie = moviesViewModel.getParticularMovie(i.movieId)
-                moviesViewModel.partMovie.observe(viewLifecycleOwner)
+                moviesViewModel.partMovie.observe(requireActivity())
                 {
                     popularMoviesArray.add(it.get(0))
                     adapter.setNewData(popularMoviesArray)
@@ -243,7 +280,7 @@ class HomeFragment : Fragment() {
     }
     private fun trendingMoviesObserver()
     {
-        trendingMovies?.observe(viewLifecycleOwner){
+        trendingMovies?.observe(requireActivity()){
             for(i in 0..5){
                 val movie = it.results.get(i)
                 moviesViewModel.addMovie(Movies(movieId = movie.movieId, movieBanner = movie.banner, moviePoster = movie.poster, movieName = movie.name, rating = movie.rating/2, releaseDate = movie.releaseDate, description = "", voteCount = movie.voteCount, status = "", runtime = 234))
@@ -256,7 +293,7 @@ class HomeFragment : Fragment() {
             }
         }
 
-        trendingMovieViewModel.allTrendingMovies.observe(viewLifecycleOwner)
+        trendingMovieViewModel.allTrendingMovies.observe(requireActivity())
         {
             var trendingMoviesArray : HashSet<Movies> = hashSetOf()
             //var count = 0
@@ -264,7 +301,7 @@ class HomeFragment : Fragment() {
             for(i in it)
             {
                 val currentMovie = moviesViewModel.getParticularMovie(i.movieId)
-                moviesViewModel.partMovie.observe(viewLifecycleOwner)
+                moviesViewModel.partMovie.observe(requireActivity())
                 {
                     //Log.i("trendingValues",count++.toString() + it.get(0).movieName)
                     trendingMoviesArray.add(it.get(0))
@@ -281,7 +318,7 @@ class HomeFragment : Fragment() {
 
     private fun recentMovieObserver()
     {
-        recentMovies?.observe(viewLifecycleOwner){
+        recentMovies?.observe(requireActivity()){
             for(i in 0..5){
                 val movie = it.results.get(i)
                 moviesViewModel.addMovie(Movies(movieId = movie.movieId, movieBanner = movie.banner, moviePoster = movie.poster, movieName = movie.name, rating = movie.rating/2, releaseDate = movie.releaseDate, description = "", voteCount = movie.voteCount, status = "", runtime = 234))
@@ -294,13 +331,13 @@ class HomeFragment : Fragment() {
         }
 
 
-        recentMovieViewModel.allRecentMovies.observe(viewLifecycleOwner)
+        recentMovieViewModel.allRecentMovies.observe(requireActivity())
         {
             var recentMovieArray: HashSet<Movies> = hashSetOf()
             for(i in it)
             {
                 val currentMovie = moviesViewModel.getParticularMovie(i.movieId)
-                moviesViewModel.partMovie.observe(viewLifecycleOwner)
+                moviesViewModel.partMovie.observe(requireActivity())
                 {
                     recentMovieArray.add(it.get(0))
                     recentAdapter.setNewData(recentMovieArray)
@@ -312,7 +349,7 @@ class HomeFragment : Fragment() {
 
     private fun actionMovieObserver()
     {
-        actionMovies?.observe(viewLifecycleOwner){
+        actionMovies?.observe(requireActivity()){
             for(i in 0..5){
                 val movie = it.results.get(i)
                 moviesViewModel.addMovie(Movies(movieId = movie.movieId, movieBanner = movie.banner, moviePoster = movie.poster, movieName = movie.name, rating = movie.rating/2, releaseDate = movie.releaseDate, description = "", voteCount = movie.voteCount, status = "", runtime = 234))
@@ -325,14 +362,14 @@ class HomeFragment : Fragment() {
         }
 
 
-        actionMoviesViewModel.allActionMovies.observe(viewLifecycleOwner)
+        actionMoviesViewModel.allActionMovies.observe(requireActivity())
         {
             var actionMovieArray: HashSet<Movies> = hashSetOf()
             var count = 0
             for(i in it)
             {
                 val currentMovie = moviesViewModel.getParticularMovie(i.movieId)
-                moviesViewModel.partMovie.observe(viewLifecycleOwner)
+                moviesViewModel.partMovie.observe(requireActivity())
                 {
                     actionMovieArray.add(it.get(0))
                     actionAdapter.setNewData(actionMovieArray)
@@ -343,7 +380,7 @@ class HomeFragment : Fragment() {
 
     private fun adventureMovieObserver()
     {
-        adventureMovies?.observe(viewLifecycleOwner){
+        adventureMovies?.observe(requireActivity()){
             for(i in 0..5){
                 val movie = it.results.get(i)
                 moviesViewModel.addMovie(Movies(movieId = movie.movieId, movieBanner = movie.banner, moviePoster = movie.poster, movieName = movie.name, rating = movie.rating/2, releaseDate = movie.releaseDate, description = "", voteCount = movie.voteCount, status = "", runtime = 234))
@@ -356,13 +393,13 @@ class HomeFragment : Fragment() {
         }
 
 
-        adventureMoviesViewModel.allAdventureMovies.observe(viewLifecycleOwner)
+        adventureMoviesViewModel.allAdventureMovies.observe(requireActivity())
         {
             var advetureMovieArray: HashSet<Movies> = hashSetOf()
             for(i in it)
             {
                 val currentMovie = moviesViewModel.getParticularMovie(i.movieId)
-                moviesViewModel.partMovie.observe(viewLifecycleOwner)
+                moviesViewModel.partMovie.observe(requireActivity())
                 {
                     advetureMovieArray.add(it.get(0))
                     adventureAdapter.setNewData(advetureMovieArray)
@@ -373,7 +410,7 @@ class HomeFragment : Fragment() {
 
     private fun animationMovieObserver()
     {
-        animationMovies?.observe(viewLifecycleOwner){
+        animationMovies?.observe(requireActivity()){
             for(i in 0..5){
                 val movie = it.results.get(i)
                 moviesViewModel.addMovie(Movies(movieId = movie.movieId, movieBanner = movie.banner, moviePoster = movie.poster, movieName = movie.name, rating = movie.rating/2, releaseDate = movie.releaseDate, description = "", voteCount = movie.voteCount, status = "", runtime = 234))
@@ -386,13 +423,13 @@ class HomeFragment : Fragment() {
         }
 
 
-        animationMoviesViewModel.allAnimationMovies.observe(viewLifecycleOwner)
+        animationMoviesViewModel.allAnimationMovies.observe(requireActivity())
         {
             var animationMovieArray: HashSet<Movies> = hashSetOf()
             for(i in it)
             {
                 val currentMovie = moviesViewModel.getParticularMovie(i.movieId)
-                moviesViewModel.partMovie.observe(viewLifecycleOwner)
+                moviesViewModel.partMovie.observe(requireActivity())
                 {
                     animationMovieArray.add(it.get(0))
                     animationAdapter.setNewData(animationMovieArray)
@@ -404,7 +441,7 @@ class HomeFragment : Fragment() {
 
     private fun romanceMovieObserver()
     {
-        romanceMovies?.observe(viewLifecycleOwner){
+        romanceMovies?.observe(requireActivity()){
             for(i in 0..5){
                 val movie = it.results.get(i)
                 moviesViewModel.addMovie(Movies(movieId = movie.movieId, movieBanner = movie.banner, moviePoster = movie.poster, movieName = movie.name, rating = movie.rating/2, releaseDate = movie.releaseDate, description = "", voteCount = movie.voteCount, status = "", runtime = 234))
@@ -417,13 +454,13 @@ class HomeFragment : Fragment() {
         }
 
 
-        romanceMoviesViewModel.allRomanceMovies.observe(viewLifecycleOwner)
+        romanceMoviesViewModel.allRomanceMovies.observe(requireActivity())
         {
             var romanceMovieArray: HashSet<Movies> = hashSetOf()
             for(i in it)
             {
                 val currentMovie = moviesViewModel.getParticularMovie(i.movieId)
-                moviesViewModel.partMovie.observe(viewLifecycleOwner)
+                moviesViewModel.partMovie.observe(requireActivity())
                 {
                     romanceMovieArray.add(it.get(0))
                     romanceAdapter.setNewData(romanceMovieArray)
@@ -434,7 +471,7 @@ class HomeFragment : Fragment() {
 
     private fun crimeMovieObserver()
     {
-        crimeMovies?.observe(viewLifecycleOwner){
+        crimeMovies?.observe(requireActivity()){
             for(i in 0..5){
                 val movie = it.results.get(i)
                 moviesViewModel.addMovie(Movies(movieId = movie.movieId, movieBanner = movie.banner, moviePoster = movie.poster, movieName = movie.name, rating = movie.rating/2, releaseDate = movie.releaseDate, description = "", voteCount = movie.voteCount, status = "", runtime = 234))
@@ -447,13 +484,13 @@ class HomeFragment : Fragment() {
         }
 
 
-        crimeMoviesViewModel.allCrimeMovies.observe(viewLifecycleOwner)
+        crimeMoviesViewModel.allCrimeMovies.observe(requireActivity())
         {
             var crimeMovieArray: HashSet<Movies> = hashSetOf()
             for(i in it)
             {
                 val currentMovie = moviesViewModel.getParticularMovie(i.movieId)
-                moviesViewModel.partMovie.observe(viewLifecycleOwner)
+                moviesViewModel.partMovie.observe(requireActivity())
                 {
                     crimeMovieArray.add(it.get(0))
                     crimeAdapter.setNewData(crimeMovieArray)
@@ -522,16 +559,7 @@ class HomeFragment : Fragment() {
         handler.removeCallbacks(runnable)
     }
 
-    override fun onResume() {
-        super.onResume()
 
-        intializeBannerViewPager()
-
-        intializeMovieListRV()
-        Log.i("lifecycle","Home fragment Resumed")
-
-        handler.postDelayed(runnable , 2000)
-    }
 
     //Banner view pager methods(intializeBannerViewPager(),setUpTransformer(),runnable)
     private fun intializeBannerViewPager()

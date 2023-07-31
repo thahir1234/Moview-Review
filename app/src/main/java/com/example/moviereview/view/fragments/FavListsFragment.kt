@@ -14,8 +14,7 @@ import com.example.moviereview.databinding.FragmentFavListsBinding
 import com.example.moviereview.db.local.entities.ListMovies
 import com.example.moviereview.db.local.entities.Lists
 import com.example.moviereview.db.local.viewmodel.LikedListViewModel
-import com.example.moviereview.db.local.viewmodel.LikedReviewsViewModel
-import com.example.moviereview.db.local.viewmodel.ListMoviesViewModel
+import com.example.moviereview.view.list_screen_clean.presentation.viewmodel.ListMoviesViewModel
 import com.example.moviereview.db.local.viewmodel.ListViewModel
 import com.example.moviereview.view.adapter.ListsRecyclerViewAdapter
 

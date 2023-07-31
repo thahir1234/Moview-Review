@@ -1,4 +1,4 @@
-package com.example.moviereview.view.activities
+package com.example.moviereview.view.list_screen_clean.presentation.view
 
 import android.content.SharedPreferences
 import android.graphics.Rect
@@ -14,9 +14,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviereview.R
 import com.example.moviereview.databinding.ActivityListBinding
-import com.example.moviereview.db.local.viewmodel.ListMoviesViewModel
+import com.example.moviereview.view.list_screen_clean.presentation.viewmodel.ListMoviesViewModel
 import com.example.moviereview.db.local.viewmodel.UsersViewModel
-import com.example.moviereview.view.adapter.UserListRvAdapter
+import com.example.moviereview.view.list_screen_clean.presentation.adapter.UserListRvAdapter
 
 class ListActivity : AppCompatActivity() {
 
@@ -60,7 +60,7 @@ class ListActivity : AppCompatActivity() {
             onBackPressed()
         }
 
-        Toast.makeText(this,listId.toString(),Toast.LENGTH_SHORT).show()
+//        Toast.makeText(this,listId.toString(),Toast.LENGTH_SHORT).show()
         adapter = UserListRvAdapter(this,listId,this,this)
 
         setUpList()

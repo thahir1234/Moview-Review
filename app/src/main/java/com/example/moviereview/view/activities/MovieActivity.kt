@@ -29,12 +29,14 @@ import com.example.moviereview.view.adapter.GenreRVAdapter
 import com.example.moviereview.view.adapter.MovieListRecyclerViewAdapter
 import com.example.moviereview.view.adapter.ShortReviewListRecyclerMovieAdapter
 import com.example.moviereview.view.fragments.MovieStatusFragment
+import com.example.moviereview.db.local.entities.Reviews
+import com.example.moviereview.view.list_screen_clean.data.api.dto.MovieList
 import com.github.javafaker.Faker
 import kotlinx.coroutines.*
 
 class MovieActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityMovieBinding
+    lateinit var binding: com.example.moviereview.databinding.ActivityMovieBinding
 
 
     lateinit var moviesViewModel : MoviesViewModel
@@ -155,6 +157,7 @@ class MovieActivity : AppCompatActivity() {
         setUpReviewBtn()
 
 
+        setUpStartBtn()
         setUpStatusBtn()
 
         setUpSeeAllReview()
@@ -163,6 +166,12 @@ class MovieActivity : AppCompatActivity() {
 
     }
 
+    private fun setUpStartBtn()
+    {
+        binding.starBtnMovie.setOnClickListener {
+            startActivity(Intent(this,SeeAllReviewActivity::class.java).putExtra("movieId",movieId))
+        }
+    }
     private fun setUpDescTv()
     {
         binding.descTvMovie.setOnClickListener {
@@ -254,20 +263,20 @@ class MovieActivity : AppCompatActivity() {
     private fun bindData(movie: Movies)
     {
         if(movie.movieBanner?.isNotEmpty() == true) {
-            HelperFunction.loadImageGlide(this,"https://image.tmdb.org/t/p/original/" + movie.movieBanner,binding.bannerIvMovie)
-//            CoroutineScope(Dispatchers.IO).launch {
-//                val bitmap = HelperFunction.downloadImage("https://image.tmdb.org/t/p/original/" + movie.movieBanner)
-//                withContext(Dispatchers.Main) {
-//                    binding.bannerIvMovie.setImageBitmap(bitmap)
-//                }
-//            }
+//            HelperFunction.loadImage(this,"https://image.tmdb.org/t/p/original/" + movie.movieBanner,binding.bannerIvMovie)
+            CoroutineScope(Dispatchers.IO).launch {
+                val bitmap = HelperFunction.downloadImage("https://image.tmdb.org/t/p/original/" + movie.movieBanner)
+                withContext(Dispatchers.Main) {
+                    binding.bannerIvMovie.setImageBitmap(bitmap)
+                }
+            }
         }
         else{
             binding.bannerIvMovie.setImageResource(R.drawable.banner_no)
         }
         if(movie.moviePoster?.isNotEmpty() == true)
         {
-            HelperFunction.loadImageGlide(this,"https://image.tmdb.org/t/p/original/" + movie.moviePoster,binding.posterIvMovie)
+            HelperFunction.loadImage(this,"https://image.tmdb.org/t/p/original/" + movie.moviePoster,binding.posterIvMovie)
 //            CoroutineScope(Dispatchers.IO).launch {
 //                val bitmap = HelperFunction.downloadImage("https://image.tmdb.org/t/p/original/" + movie.moviePoster)
 //                withContext(Dispatchers.Main) {
@@ -408,20 +417,26 @@ class MovieActivity : AppCompatActivity() {
         castsViewModel.getCasts(movieId)
         castsViewModel.casts.observe(this)
         {
-            var l = it.size
-            castsArray = hashSetOf()
-            if(it.size>8)
+            if(it.size==0)
             {
-                l = 8
-            }
-            for (i in it.indices)
-            {
-                castsArray.add(it.get(i))
-            }
-            Log.i("casts","first time"+it.size)
-            isLoaded.value = true
+                binding.noCastTv.visibility = View.VISIBLE
+                binding.castsRvMovie.visibility=View.GONE
+                isLoaded.value = true
 
-            castsAdapter.setCasts(castsArray)
+            }
+            else {
+                binding.noCastTv.visibility = View.GONE
+                binding.castsRvMovie.visibility=View.VISIBLE
+                castsArray = hashSetOf()
+
+                for (i in it.indices) {
+                    castsArray.add(it.get(i))
+                }
+                Log.i("casts", "first time" + it.size)
+                isLoaded.value = true
+
+                castsAdapter.setCasts(castsArray)
+            }
         }
     }
 
@@ -435,7 +450,7 @@ class MovieActivity : AppCompatActivity() {
                 {
                     i.authorDetails.userName = Faker().name().firstName()
                 }
-                reviewsViewModel.addReview(Reviews(name = i.authorDetails.userName, movieName = movieName, movieId = movieId, date = i.createdDate.substring(0,10), content = i.content, rating = i.authorDetails.rating))
+                reviewsViewModel.addReview(Reviews(name = i.authorDetails.userName, movieName = movieName, movieId = movieId, date = i.createdDate.substring(0,10), content = i.content, rating = i.authorDetails.rating/2))
             }
         }
     }

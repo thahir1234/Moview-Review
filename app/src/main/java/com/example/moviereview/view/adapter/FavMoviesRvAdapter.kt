@@ -16,11 +16,8 @@ import com.example.moviereview.db.local.viewmodel.MoviesViewModel
 import com.example.moviereview.utils.HelperFunction
 import com.example.moviereview.view.activities.MovieActivity
 import com.example.moviereview.view.fragments.FavMovieFragment
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.util.LinkedList
+import kotlinx.coroutines.*
 
 class FavMoviesRvAdapter(val context: Context,val favMovieFragment: FavMovieFragment): RecyclerView.Adapter<FavMoviesRvAdapter.MyViewHolder>() {
 
@@ -52,7 +49,7 @@ class FavMoviesRvAdapter(val context: Context,val favMovieFragment: FavMovieFrag
             for(i in it) {
                 val currentItem = i
                 if(currentItem.moviePoster?.isNotEmpty() == true) {
-                    HelperFunction.loadImageGlide(context,"https://image.tmdb.org/t/p/original/" + currentItem.moviePoster,holder.poster)
+                    HelperFunction.loadImage(context,"https://image.tmdb.org/t/p/original/" + currentItem.moviePoster,holder.poster)
 //                    CoroutineScope(Dispatchers.IO).launch {
 //                        val bitmap = HelperFunction.downloadImage("https://image.tmdb.org/t/p/original/" + currentItem.moviePoster)
 //                        withContext(Dispatchers.Main) {

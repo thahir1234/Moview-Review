@@ -1,4 +1,4 @@
-package com.example.moviereview.db.local.viewmodel
+package com.example.moviereview.view.list_screen_clean.presentation.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -6,50 +6,52 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.example.moviereview.db.local.MovieDatabase
 import com.example.moviereview.db.local.entities.ListMovies
-import com.example.moviereview.db.local.entities.Reviews
 import com.example.moviereview.db.local.repositories.ListMoviesRepository
-import com.example.moviereview.db.local.repositories.ReviewsRepository
+import com.example.moviereview.view.list_screen_clean.data.repository.ListMovieRepoImpl
+import com.example.moviereview.view.list_screen_clean.domain.usecases.AddListMovie
+import com.example.moviereview.view.list_screen_clean.domain.usecases.DeleteListMovie
+import com.example.moviereview.view.list_screen_clean.domain.usecases.GetListMovies
+import com.example.moviereview.view.list_screen_clean.domain.usecases.GetPartMovie
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ListMoviesViewModel(application: Application) : AndroidViewModel(application) {
-    private val repository : ListMoviesRepository
+    private val repository : ListMovieRepoImpl
 
     lateinit var listMoviesByListId : LiveData<List<ListMovies>>
-    lateinit var moviesById : LiveData<List<ListMovies>>
     lateinit var moviesByBoth : LiveData<List<ListMovies>>
     init {
         val listMoviesDao = MovieDatabase.getDatabase(application)?.listMoviesDao()
-        repository = ListMoviesRepository(listMoviesDao!!)
+        repository = ListMovieRepoImpl(listMoviesDao!!)
     }
 
     fun addListMovie(listMovie : ListMovies)
     {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.addListMovie(listMovie)
+            val addListMovie = AddListMovie(repository)
+            addListMovie(listMovie)
         }
     }
 
     fun getListMovies(listId:Int)
     {
-        listMoviesByListId = repository.getListMovies(listId)
+        val getListMovies = GetListMovies(repository)
+        listMoviesByListId = getListMovies(listId)
     }
 
-    fun getMoviesById(movieId: Int)
-    {
-        moviesById = repository.getMoviesById(movieId)
-    }
 
     fun getMoviesByBoth(listId: Int,movieId: Int)
     {
-        moviesByBoth = repository.getMoviesByBoth(listId,movieId)
+        val getPartMovie = GetPartMovie(repository)
+        moviesByBoth = getPartMovie(listId,movieId)
     }
 
     fun deleteListMovie(listId: Int,movieId: Int)
     {
         viewModelScope.launch(Dispatchers.IO)
         {
-            repository.deleteListMovie(movieId,listId)
+            val deleteListMovie = DeleteListMovie(repository)
+            deleteListMovie(movieId,listId)
         }
     }
 }

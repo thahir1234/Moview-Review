@@ -10,8 +10,6 @@
         layout="@layout/toolbar" />
 
     <androidx.core.widget.NestedScrollView
-        android:paddingBottom="90dp"
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,11 +73,11 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/bio_et_container"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:hint="Bio"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/name_et_container">
@@ -90,15 +88,14 @@
                     android:layout_height="wrap_content"
                     android:gravity="top|start"
                     android:inputType="textMultiLine"
+                    android:isScrollContainer="true"
                     android:lines="8"
-                    android:maxLines="10"
                     android:minLines="6"
                     android:scrollbars="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.625"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/rating_value_tv" />
-
 
             </com.google.android.material.textfield.TextInputLayout>
 

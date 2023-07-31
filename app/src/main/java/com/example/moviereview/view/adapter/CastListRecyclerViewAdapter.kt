@@ -12,11 +12,8 @@ import com.example.moviereview.R
 import com.example.moviereview.db.local.entities.Casts
 import com.example.moviereview.utils.HelperFunction
 import com.example.moviereview.view.activities.PeopleActivity
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.util.LinkedList
+import kotlinx.coroutines.*
 
 class CastListRecyclerViewAdapter(var context: Context):RecyclerView.Adapter<CastListRecyclerViewAdapter.MyViewHolder>() {
 
@@ -40,7 +37,7 @@ class CastListRecyclerViewAdapter(var context: Context):RecyclerView.Adapter<Cas
 
         if(currentCast.profilePic != null)
         {
-            HelperFunction.loadImageGlide(context,"https://image.tmdb.org/t/p/original/" + currentCast.profilePic,holder.castPic)
+            HelperFunction.loadImage(context,"https://image.tmdb.org/t/p/original/" + currentCast.profilePic,holder.castPic)
 //            CoroutineScope(Dispatchers.IO).launch {
 //                val bitmap = HelperFunction.downloadImage("https://image.tmdb.org/t/p/original/" + currentCast.profilePic)
 //                withContext(Dispatchers.Main) {

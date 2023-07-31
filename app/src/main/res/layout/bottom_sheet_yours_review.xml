@@ -55,6 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ascending"
+            android:buttonTint="@color/manga"
             android:layout_marginEnd="35dp"
             app:layout_constraintEnd_toStartOf="@+id/desc_rb_your_review"
             android:layout_gravity="center_horizontal"
@@ -67,6 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Descending"
+            android:buttonTint="@color/manga"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/asc_rb_your_review"
@@ -86,18 +88,21 @@
             android:id="@+id/name_rb_your_review"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:buttonTint="@color/manga"
             android:text="Name" />
 
         <RadioButton
             android:id="@+id/rating_rb_your_review"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:buttonTint="@color/manga"
             android:text="Rating" />
 
         <RadioButton
             android:id="@+id/date_rb_your_review"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:buttonTint="@color/manga"
             android:text="Date"
              />
     </RadioGroup>

@@ -2,23 +2,19 @@ package com.example.moviereview.view.adapter
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviereview.R
 import com.example.moviereview.db.local.entities.Movies
 import com.example.moviereview.db.remote.model.ShortMovieDesc
 import com.example.moviereview.utils.HelperFunction
 import com.example.moviereview.view.activities.MovieActivity
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
+
 
 class SearchResultRvAdapter(val context: Context) : RecyclerView.Adapter<SearchResultRvAdapter.MyViewHolder>() {
 
@@ -44,13 +40,13 @@ class SearchResultRvAdapter(val context: Context) : RecyclerView.Adapter<SearchR
 
             val currentItem = resultsMovies[position]
             if(currentItem.moviePoster?.isNotEmpty() == true) {
-                HelperFunction.loadImageGlide(context,"https://image.tmdb.org/t/p/original/" + currentItem.moviePoster,holder.poster)
-//                CoroutineScope(Dispatchers.IO).launch {
-//                    val bitmap = HelperFunction.downloadImage("https://image.tmdb.org/t/p/original/" + currentItem.moviePoster)
-//                    withContext(Dispatchers.Main) {
-//                        holder.poster.setImageBitmap(bitmap)
-//                    }
-//                }
+//                HelperFunction.loadImage(context,"https://image.tmdb.org/t/p/original/" + currentItem.moviePoster,holder.poster)
+                CoroutineScope(Dispatchers.IO).launch {
+                    val bitmap = HelperFunction.downloadImage("https://image.tmdb.org/t/p/original/" + currentItem.moviePoster)
+                    withContext(Dispatchers.Main) {
+                        holder.poster.setImageBitmap(bitmap)
+                    }
+                }
             }
             else{
                 holder.poster.setImageResource(R.drawable.poster_not)
@@ -61,7 +57,7 @@ class SearchResultRvAdapter(val context: Context) : RecyclerView.Adapter<SearchR
             }
             holder.rating.text =  String.format("%.1f", currentItem.rating).toFloat().toString()
             holder.itemView.setOnClickListener {
-                onClick(currentItem.movieId)
+                onClick(currentItem.movieId, currentItem.movieName, currentItem.rating)
             }
         }
         else
@@ -69,7 +65,7 @@ class SearchResultRvAdapter(val context: Context) : RecyclerView.Adapter<SearchR
 //            Log.i("usermovies","inside")
             val currentItem = results[position]
             if(currentItem.poster?.isNotEmpty() == true) {
-                HelperFunction.loadImageGlide(context,"https://image.tmdb.org/t/p/original/" + currentItem.poster,holder.poster)
+                HelperFunction.loadImage(context,"https://image.tmdb.org/t/p/original/" + currentItem.poster,holder.poster)
 //                CoroutineScope(Dispatchers.IO).launch {
 //                    val bitmap = HelperFunction.downloadImage("https://image.tmdb.org/t/p/original/" + currentItem.poster)
 //                    withContext(Dispatchers.Main) {
@@ -87,19 +83,21 @@ class SearchResultRvAdapter(val context: Context) : RecyclerView.Adapter<SearchR
             holder.rating.text =  String.format("%.1f", currentItem.rating/2).toFloat().toString()
 
             holder.itemView.setOnClickListener {
-                onClick(currentItem.movieId)
+                onClick(currentItem.movieId,currentItem.name,currentItem.rating)
             }
 
         }
 
     }
 
-    private fun onClick(movieId:Int)
+    private fun onClick(movieId: Int, name: String, rating: Float)
     {
-        Toast.makeText(context,movieId.toString(), Toast.LENGTH_SHORT).show()
+//        Toast.makeText(context,movieId.toString(), Toast.LENGTH_SHORT).show()
         val intent = Intent(context, MovieActivity::class.java)
 
         intent.putExtra("movieId",movieId)
+        intent.putExtra("movieName",name)
+        intent.putExtra("rating",rating/2)
         context.startActivity(intent)
     }
 
@@ -113,7 +111,8 @@ class SearchResultRvAdapter(val context: Context) : RecyclerView.Adapter<SearchR
 
     fun setNewResults(newResult: ArrayList<ShortMovieDesc>)
     {
-        results = newResult
+
+            results = newResult
         notifyDataSetChanged()
     }
 

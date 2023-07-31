@@ -7,7 +7,7 @@ import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "tblUsers",indices = [Index(value = ["userId"], unique = true)] ,foreignKeys = [ForeignKey(entity = com.example.moviereview.db.local.entities.Accounts::class, parentColumns = ["email"], childColumns = ["email"], onDelete = ForeignKey.CASCADE)])
+@Entity(tableName = "tblUsers",indices = [Index(value = ["userId"], unique = false)] ,foreignKeys = [ForeignKey(entity = com.example.moviereview.db.local.entities.Accounts::class, parentColumns = ["email"], childColumns = ["email"], onDelete = ForeignKey.CASCADE)])
 data class Users(
     val userId:Int,
     @PrimaryKey(autoGenerate = false)

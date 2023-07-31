@@ -1,14 +1,9 @@
 package com.example.moviereview.view.adapter
 
-import android.view.View
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.moviereview.R
-import com.example.moviereview.view.fragments.FavListsFragment
-import com.example.moviereview.view.fragments.FavMovieFragment
 import com.example.moviereview.view.fragments.YourReviewFragment
 import com.example.moviereview.view.fragments.YoursListsFragment
 

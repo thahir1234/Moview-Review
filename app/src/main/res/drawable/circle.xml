@@ -1,4 +1,4 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="#824ED6"/> <!-- Replace with desired background color -->
+    <solid android:color="@color/manga"/> <!-- Replace with desired background color -->
     <corners android:radius="500dp"/> <!-- Set the radius to half of the desired width or height to make it circular -->
 </shape>

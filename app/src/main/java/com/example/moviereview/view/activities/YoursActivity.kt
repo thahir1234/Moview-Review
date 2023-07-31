@@ -1,6 +1,7 @@
 package com.example.moviereview.view.activities
 
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -19,6 +20,7 @@ import com.example.moviereview.databinding.ActivityYoursBinding
 import com.example.moviereview.db.local.viewmodel.ReviewsViewModel
 import com.example.moviereview.view.adapter.YoursVpAdapter
 import com.example.moviereview.view.fragments.AddListDialog
+import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
 
 
@@ -89,5 +91,8 @@ class YoursActivity : AppCompatActivity() {
         })
     }
 
-
+    override fun onBackPressed() {
+        setResult(100, Intent())
+        finish()
+    }
 }

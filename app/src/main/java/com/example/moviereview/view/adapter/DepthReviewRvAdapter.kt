@@ -21,8 +21,6 @@ import com.example.moviereview.db.local.viewmodel.LikedReviewsViewModel
 import com.example.moviereview.db.local.viewmodel.UsersViewModel
 import com.example.moviereview.utils.HelperFunction
 import com.google.android.material.imageview.ShapeableImageView
-import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.collections.HashSet
 
 class DepthReviewRvAdapter(var context: Context, var vm: ViewModelStoreOwner, var lifecycleOwner: LifecycleOwner):

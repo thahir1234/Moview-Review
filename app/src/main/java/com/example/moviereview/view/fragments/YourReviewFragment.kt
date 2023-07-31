@@ -209,8 +209,10 @@ class YourReviewFragment : Fragment() {
         {
             descRb.isChecked = true
             nameRb.isChecked = true
+            Log.i("sort_review","name_desc")
             reviewsViewModel.allReviewsNameDesc.observe(this)
             {
+                Log.i("sort_review",it.size.toString())
                 setUpData(it)
             }
         }
@@ -243,19 +245,20 @@ class YourReviewFragment : Fragment() {
             {
                 Log.i("TabFrag","${i.movieName}")
                 reviews.add(i)
+                adapter.setNewReviews(reviews)
             }
-            if(reviews.size>0)
-            {
-                binding.yourReviewRv.visibility = View.VISIBLE
-                binding.yourReviewNoData.visibility = View.GONE
-            }
-            else
-            {
-                binding.yourReviewNoData.visibility = View.VISIBLE
-                binding.yourReviewRv.visibility = View.GONE
-            }
+
             Log.i("TabFrag","${reviews.size} ${reviewsViewModel.isAsc} ${reviewsViewModel.isName} $email")
-            adapter.setNewReviews(reviews)
+        }
+        if(reviews.size>0)
+        {
+            binding.yourReviewRv.visibility = View.VISIBLE
+            binding.yourReviewNoData.visibility = View.GONE
+        }
+        else
+        {
+            binding.yourReviewNoData.visibility = View.VISIBLE
+            binding.yourReviewRv.visibility = View.GONE
         }
     }
 }

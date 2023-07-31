@@ -19,7 +19,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:scaleType="fitXY"
-            android:src="@drawable/chris_evans"
+            android:src="@drawable/person"
             app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

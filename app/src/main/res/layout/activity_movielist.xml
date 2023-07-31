@@ -53,6 +53,7 @@
             android:id="@+id/progess_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:indeterminateTint="@color/manga"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/movielist_rv" />

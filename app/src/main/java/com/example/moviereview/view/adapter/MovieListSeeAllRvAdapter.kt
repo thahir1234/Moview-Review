@@ -13,11 +13,8 @@ import com.example.moviereview.db.local.entities.Movies
 import com.example.moviereview.db.local.viewmodel.MoviesViewModel
 import com.example.moviereview.utils.HelperFunction
 import com.example.moviereview.view.activities.SeeAllMovieActivity
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.util.LinkedList
+import kotlinx.coroutines.*
 
 class MovieListSeeAllRvAdapter(var context: Context, var yourReviewFragment: SeeAllMovieActivity):RecyclerView.Adapter<MovieListSeeAllRvAdapter.MyViewHolder>() {
 
@@ -45,7 +42,8 @@ class MovieListSeeAllRvAdapter(var context: Context, var yourReviewFragment: See
         moviesViewModel.partMovie.observe(yourReviewFragment)
         {
             Log.i("order","$position ${it.get(0).movieName}")
-            HelperFunction.loadImageGlide(context,"https://image.tmdb.org/t/p/original/" + it.get(0).moviePoster,holder.poster)
+
+            HelperFunction.loadImage(context,"https://image.tmdb.org/t/p/original/" + it.get(0).moviePoster,holder.poster)
 //            CoroutineScope(Dispatchers.IO).launch {
 //                val bitmap = HelperFunction.downloadImage("https://image.tmdb.org/t/p/original/" + it.get(0).moviePoster)
 //                withContext(Dispatchers.Main) {
